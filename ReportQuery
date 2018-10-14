@@ -1,0 +1,35 @@
+
+
+public class ReportQuery{
+
+public Map<String,Object> getSingleReport(String reportCategory, String reportType, String contractId) throws SQLException {
+		Connection con = getConnection();
+		statement = con.createStatement();
+		String sql = "select * from userdetails where userName='"+contractId+"'";
+		System.out.println(sql);
+		resultSet = statement.executeQuery(sql);
+
+		List<Map<String, Object>> rows = new ArrayList<Map<String, Object>>();
+		ResultSetMetaData metaData = resultSet.getMetaData();
+		int columnCount = metaData.getColumnCount();
+		Map<String, Object> columns=null;
+		while (resultSet.next()) {
+		/*	resultSet.getString(1);
+			System.out.println("1st record" + resultSet.getString(1));*/
+			
+		 columns = new LinkedHashMap<String, Object>();
+
+		    for (int i = 1; i <= columnCount; i++) {
+		        columns.put(metaData.getColumnLabel(i), resultSet.getObject(i));
+		    }
+
+		    rows.add(columns);
+		    
+		    
+
+		}
+//		System.out.println("columns"+rows);
+		return columns;
+
+	}
+}
