@@ -7,6 +7,7 @@ private Long id;
 
 private String fileName;
 private Blob fileData;
+private modifiedDatee;
 private String description;
 
 
